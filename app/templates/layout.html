@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Равлик Суші</title>
+    <link type= "text/css" href= "../static/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<body>
+<header>
+    <img src="../static/back_top_smaller.png" class="top_image">
+    <div id="contacts">
+        <a href="#">
+        <div class="contact">
+            <img src="../static/instagram_logo_no_background.png"> &nbsp;&nbsp;&nbsp;@ravlyk_sushi
+        </div>
+        </a>
+        <a href="#">
+        <div class="contact">
+            <img src="../static/lifecell_logo_no_background.png"> &nbsp;&nbsp;&nbsp;0638988989
+        </div>
+        </a>
+        <div class="contact"></div>
+    </div>
+    <nav><div id="main_menu">
+        <div class="nav_item active">
+            <a href="{{url_for('bp.dragons')}}">
+            Дракони
+            </a>
+        </div>
+        <div class="nav_item">
+            Каліфорнія
+        </div>
+        <div class="nav_item">
+            Макі
+        </div><div class="nav_item">
+            Напої
+        </div></div>
+        <div id="bascket" class="nav_item"> Кошик<box-icon name='basket'></box-icon></div>
+    </nav>
+</header>
+<main>
+
+{% block content %}
+
+{% endblock %}
+
+</main>
+</body>
+</html>
