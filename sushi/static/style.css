@@ -59,7 +59,8 @@ nav{
     padding-left: 2%;
 }
 
-#main_menu a{
+#main_menu a,
+#bascket a{
     text-decoration: none;
     color: white;
 }
@@ -68,16 +69,22 @@ nav{
     padding: 1%;
     padding-right: 1em;
     padding-left: 1em;
+    border-radius: 20px;
+}
+.nav_item:hover{
+    border: 1px solid #8114DF;
+    transition-duration: .5s;
+}
+
+#bascket i{
+    color:#8114DF;
+    font-size: 1rem;
 }
 
 .active{
-    border: 1px solid #8114DF;
-    border-radius: 20px;
+    background-color: #8114DF;
 }
 
-.box-icon{
-   color: #8114DF;
-}
 
 main{
     padding: 0rem 3rem 0rem 3rem;

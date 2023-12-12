@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <header>
@@ -30,18 +30,26 @@
     <nav><div id="main_menu">
         <div class="nav_item active">
             <a href="{{url_for('bp.dragons')}}">
-            Дракони
+                Дракони
             </a>
         </div>
         <div class="nav_item">
-            Каліфорнія
+            <a href="{{url_for('bp.dragons')}}">
+                Каліфорнія
+            </a>
         </div>
         <div class="nav_item">
-            Макі
-        </div><div class="nav_item">
-            Напої
-        </div></div>
-        <div id="bascket" class="nav_item"> Кошик<box-icon name='basket'></box-icon></div>
+            <a href="{{url_for('bp.dragons')}}">
+                Макі
+            </a>
+        </div>
+        <div class="nav_item">
+            <a href="{{url_for('bp.dragons')}}">
+                Напої
+            </a>
+        </div>
+        </div>
+        <div id="bascket" class="nav_item"><a href="#"> Кошик<i class="fa-light fa-basket-shopping"></i></a></div>
     </nav>
 </header>
 <main>
