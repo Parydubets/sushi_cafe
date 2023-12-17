@@ -1,90 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="menu_item">
+{% for item in data %}
+<div class="menu_item" id="scroll_to">
   <div class="inner_menu_item">
     <div class="img_description">
-      <img src="../static/set1_copy.jpg" alt="Фото сету 1. Дракон вогняний" width="355px" height="335px">
-      <h2>Дракон вогняний</h2>
-      <p>Норі, Рис, Тигрова креветка, Огірок, Лосось філе, Тобіко (зверху), Сир філа</p>
+      <img src="{{item.photo}}" alt="Фото сету {{item.name}}" width="355px" height="335px">
+      <h2>{{item.name}}</h2>
+      <p>{{item.description}}</p>
       <div class="mass_price">
-      <p class="mass">270г</p>
-      <p class="price">197грн</p>
+      <p class="mass">{{item.mass}}г</p>
+      <p class="price">{{item.price}}грн</p>
     </div>
     </div>
 <a class="add_item_btn">Замовити</a>
   </div>
 </div>
-<div class="menu_item">
-  <div class="inner_menu_item">
-    <div class="img_description">
-      <img src="../static/set2_copy.jpg" alt="Фото сету 1. Дракон вогняний" width="355px" height="335px">
-      <h2>Дракон зелений</h2>
-      <p>Норі, Рис, Сир філа, Вугор, Ікра тобіко, Авокадо, Унагі соус, Кунжут, Огірок</p>
-      <div class="mass_price">
-      <p class="mass">275г</p>
-      <p class="price">167грн</p>
-    </div>
-    </div>
-<a class="add_item_btn">Замовити</a>
-  </div>
-</div>
-<div class="menu_item">
-  <div class="inner_menu_item">
-    <div class="img_description">
-      <img src="../static/set3_copy.jpg" alt="Фото сету 1. Дракон вогняний" width="355px" height="335px">
-      <h2>Дракон золотий</h2>
-      <p>Норі, Рис, Огірок, Вугор, Тобіко, Сир філа, Тигрова креветка</p>
-      <div class="mass_price">
-      <p class="mass">255г</p>
-      <p class="price">182грн</p>
-    </div>
-    </div>
-<a class="add_item_btn">Замовити</a>
-  </div>
-</div>
-<div class="menu_item">
-  <div class="inner_menu_item">
-    <div class="img_description">
-      <img src="../static/set1_copy.jpg" alt="Фото сету 1. Дракон вогняний" width="355px" height="335px">
-      <h2>Дракон вогняний</h2>
-      <p>Норі, Рис, Тигрова креветка, Огірок, Лосось філе, Тобіко (зверху), Сир філа</p>
-      <div class="mass_price">
-      <p class="mass">270г</p>
-      <p class="price">197грн</p>
-    </div>
-    </div>
-<a class="add_item_btn">Замовити</a>
-  </div>
-</div>
-<div class="menu_item">
-  <div class="inner_menu_item">
-    <div class="img_description">
-      <img src="../static/set2_copy.jpg" alt="Фото сету 1. Дракон вогняний" width="355px" height="335px">
-      <h2>Дракон зелений</h2>
-      <p>Норі, Рис, Сир філа, Вугор, Ікра тобіко, Авокадо, Унагі соус, Кунжут, Огірок</p>
-      <div class="mass_price">
-      <p class="mass">275г</p>
-      <p class="price">167грн</p>
-    </div>
-    </div>
-<a class="add_item_btn">Замовити</a>
-  </div>
-</div>
-<div class="menu_item">
-  <div class="inner_menu_item">
-    <div class="img_description">
-      <img src="../static/set3_copy.jpg" alt="Фото сету 1. Дракон вогняний" width="355px" height="335px">
-      <h2>Дракон золотий</h2>
-      <p>Норі, Рис, Огірок, Вугор, Тобіко, Сир філа, Тигрова креветка</p>
-      <div class="mass_price">
-      <p class="mass">255г</p>
-      <p class="price">182грн</p>
-    </div>
-    </div>
-<a class="add_item_btn">Замовити</a>
-  </div>
-</div>
+
+{% endfor %}
 
 
 {% endblock %}

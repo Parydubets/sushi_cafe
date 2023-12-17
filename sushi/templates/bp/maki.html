@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
 
-</body>
-</html>
+{% for item in data %}
+<div class="menu_item">
+  <div class="inner_menu_item">
+    <div class="img_description">
+      <img src="{{item.photo}}" alt="Фото сету {{item.name}}" width="355px" height="335px">
+      <h2>{{item.name}}</h2>
+      <p>{{item.description}}</p>
+      <div class="mass_price">
+      <p class="mass">{{item.mass}}г</p>
+      <p class="price">{{item.price}}грн</p>
+    </div>
+    </div>
+<a class="add_item_btn">Замовити</a>
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

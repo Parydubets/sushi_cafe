@@ -7,9 +7,10 @@
     <link type= "text/css" href= "../static/style.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lobster" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 <header>
@@ -27,29 +28,29 @@
         </a>
         <div class="contact"></div>
     </div>
-    <nav><div id="main_menu">
-        <div class="nav_item active">
+    <nav><div id="main_menu" >
+        <div class="nav_item active" id="scroll_to">
             <a href="{{url_for('bp.dragons')}}">
                 Дракони
             </a>
         </div>
         <div class="nav_item">
-            <a href="{{url_for('bp.dragons')}}">
+            <a href="{{url_for('bp.california')}}">
                 Каліфорнія
             </a>
         </div>
         <div class="nav_item">
-            <a href="{{url_for('bp.dragons')}}">
+            <a href="{{url_for('bp.maki')}}">
                 Макі
             </a>
         </div>
         <div class="nav_item">
-            <a href="{{url_for('bp.dragons')}}">
+            <a href="{{url_for('bp.drinks')}}">
                 Напої
             </a>
         </div>
         </div>
-        <div id="bascket" class="nav_item"><a href="#"> Кошик<i class="fa-light fa-basket-shopping"></i></a></div>
+        <div id="bascket" class="nav_item"><a href="#"> Кошик<i class='bx bx-cart' ></i></a></div>
     </nav>
 </header>
 <main>
@@ -57,7 +58,17 @@
 {% block content %}
 
 {% endblock %}
-
 </main>
+
 </body>
+<script>
+    function scroll(){
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#scroll_to").offset().top
+    }, 2000);
+  }
+  window.onload = scroll;
+  document.getElementById("scroll_top_btn").addEventListener("click", scroll);
+</script>
+<a class="scroll_top" href="#scroll_to" > <i class='bx bx-chevrons-up'></i></a>
 </html>
