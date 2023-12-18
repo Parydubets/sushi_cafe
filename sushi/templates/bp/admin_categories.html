@@ -65,11 +65,6 @@
                 </tbody>
             </table>-->
 <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-{% if current_user.is_authenticated %}
-  <h1>Hi {{ current_user.name }}!</h1>
-{%else%}
-<h1>Hi mr. nobody</h1>
-{% endif %}
     <script>
       const tableDiv = document.getElementById('table');
         console.log("begin");
@@ -88,19 +83,16 @@
 console.log("creating table");
       new gridjs.Grid({
         columns: [
-          { id: 'id', 'hidden': true },
+          { id: 'id',name: 'Category id',  width: '8%'},
           { id: 'name', name: 'Name',  width: '8%','attributes': editableCellAttributes },
-          { id: 'description', sort: false, name: 'Description' , width: '15%', 'attributes': editableCellAttributes },
-          { id: 'category_id', name: 'Category', sort: false, width: '5%', 'attributes': editableCellAttributes },
-          { id: 'mass', name: 'Mass', width: '5%', 'attributes': editableCellAttributes },
-          { id: 'price', name: 'Price', width: '5%', 'attributes': editableCellAttributes },
-          { id: 'photo', name: 'Photo' , sort: false, width: '12%', 'attributes': editableCellAttributes, formatter: (cell) => {
-            return gridjs.html(`${cell}`)
+          { id: 'items', sort: false, name: 'Items' , width: '15%', 'attributes': editableCellAttributes, formatter: (cell) => {
+            cell = cell.join('</br>')
+              return gridjs.html(`${cell}`)
             // return `Update button`
-        } },
+        }},
         ],
         server: {
-          url: '/api/items',
+          url: '/api/categories',
           then: results => results.data,
           total: results => results.total,
         },
@@ -117,7 +109,7 @@ console.log("creating table");
           multiColumn: true,
           server: {
             url: (prev, columns) => {
-              const columnIds = ['id', 'name', 'description', 'category_id', 'mass', 'price', 'photo'];
+              const columnIds = ['id', 'name'];
               const sort = columns.map(col => (col.direction === 1 ? '+' : '-') + columnIds[col.index]);
               return updateUrl(prev, {sort});
             },
@@ -143,7 +135,7 @@ console.log("creating table");
       tableDiv.addEventListener('focusout', ev => {
         if (ev.target.tagName === 'TD') {
           if (savedValue !== ev.target.textContent) {
-            fetch('/api/items', {
+            fetch('/api/categories', {
               method: 'POST',
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({

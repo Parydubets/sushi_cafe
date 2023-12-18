@@ -29,22 +29,22 @@
         <div class="contact"></div>
     </div>
     <nav><div id="main_menu" >
-        <div class="nav_item active" id="scroll_to">
+        <div class="nav_item {% if page == "dragons" %} active {%endif%}" id="scroll_to">
             <a href="{{url_for('bp.dragons')}}">
                 Дракони
             </a>
         </div>
-        <div class="nav_item">
+        <div class="nav_item {% if page == "california" %} active {%endif%}">
             <a href="{{url_for('bp.california')}}">
                 Каліфорнія
             </a>
         </div>
-        <div class="nav_item">
+        <div class="nav_item {% if page == "maki" %} active {%endif%}">
             <a href="{{url_for('bp.maki')}}">
                 Макі
             </a>
         </div>
-        <div class="nav_item">
+        <div class="nav_item {% if page == "drinks" %} active {%endif%}">
             <a href="{{url_for('bp.drinks')}}">
                 Напої
             </a>

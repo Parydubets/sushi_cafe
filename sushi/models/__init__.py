@@ -1,1 +1,1 @@
-from .models import db, Category, Good
+from .models import db, Category, Good, User

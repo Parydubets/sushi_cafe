@@ -15,3 +15,4 @@ class LogInForm(FlaskForm):
     email       = StringField("Email", [DataRequired(), Email(), Length(min=5, max=30)], render_kw={"placeholder": "name@gmail.com"})
     password    = PasswordField("Password", [DataRequired()],render_kw={"placeholder": "******"})
     submit      = SubmitField("Log in")
+

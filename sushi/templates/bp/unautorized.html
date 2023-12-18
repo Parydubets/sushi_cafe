@@ -14,31 +14,12 @@
 </head>
 </head>
 <body>
-{% with messages = get_flashed_messages(with_categories=true) %}
 
-    {% if messages %}
-        {% for category, message in messages %}
-            <div class="alert" style="background: aquamarine">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-
-
-{% endwith %}
 <div class="center_vertical">
-     <form class="edit-form" name="Create client" method="post" novalidate>
-                    {{ form.hidden_tag() }}
-         {{form.email}}
-         {% for error in form.email.errors %}
-            <span class="error-message">{{ error }}</span>
-         {% endfor %}
-         {{form.password}}
-         {% for error in form.password.errors %}
-            <span class="error-message">{{ error }}</span>
-         {% endfor %}
-         {{form.submit(class_="log_in_btn")}}
-     </form>
+     <div class="edit-form message">
+        <h2> Sorry, you do not have access to this page</h2>
+       <a href="{{url_for('bp.dragons')}}" class="log_in_btn">Return to home page</a>
+     </div>
 </div>
 </body>
 </html>

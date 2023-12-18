@@ -14,28 +14,32 @@
 <body>
 <header>
     <nav class="admin_main"><div id="main_menu" >
-        <div class="nav_item active admin_nav">
-            <a href="{{url_for('log_check')}}">
-                Items list
+        <div class="nav_item admin_nav {% if page == "items" %} active {%endif%} ">
+            <a href="{{url_for('bp.admin_items')}}">
+                Items
             </a>
         </div>
-        <div class="nav_item admin_nav">
-            <a href="{{url_for('bp.add_item')}}">
-                Add item
+        <div class="nav_item admin_nav {% if page == "categories" %} active {%endif%}">
+            <a href="{{url_for('bp.admin_categories')}}">
+                Categories
             </a>
+        </div>
+        <div class="nav_item admin_nav dropdown {% if page == "add_itm" %} active {%endif%}">
+            <btn class="dropbtn">
+                Add item
+            </btn>
+            <div class="dropdown-content">
+                <a href="#" class="purple_text">Add category</a>
+                <a href="{{url_for('bp.add_item')}}">Add goods</a>
+            </div>
         </div>
         <div class="nav_item admin_nav">
             <a href="{{url_for('bp.dragons')}}">
                 Stats
             </a>
         </div>
-        <div class="nav_item admin_nav">
-            <a href="{{url_for('bp.dragons')}}">
-                Напої
-            </a>
         </div>
-        </div>
-        <div id="bascket" class="nav_item admin_nav"><a href="#"> Log out<i class="fa-light fa-basket-shopping"></i></a></div>
+        <div id="bascket" class="nav_item admin_nav"><a href="{{url_for('bp.logout')}}"> Log out</a></div>
     </nav>
 </header>
 <main>

@@ -2,6 +2,7 @@ html{
     background: #0C0C0C;
     max-width: 100vw;
     max-height: 100vh;
+    font-family: "Yanone Kaffeesatz", "Lobster";
 }
 
 body{
@@ -100,11 +101,12 @@ main{
     min-width: calc(100% - 6rem);
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .menu_item{
     background: #F0E1E1;
-    margin: 2rem auto 2rem auto;
+    margin: 1.7rem;
     height: 600px;
     width: 420px;
 }
@@ -289,4 +291,62 @@ table{ font-style: normal; }
 
 td img{
     max-height: 300px;
+}
+
+.dropbtn {
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+    font-size: 1.5rem;
+  background-color: #0A0A09;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+  left: 10px;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+    border-radius: 50px;
+    border: 1px solid #8114DF;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+    transition: 1s ease-in;
+}
+
+.dropdown-content a:hover {
+    background-color: #bdbaba;
+    border-radius: 5px;
+    border: 1px solid #8114DF;
+    color: #8114DF;!important;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.message{
+    padding: 2% 4% 2% 4%;
+    font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 50px;
+    color: #8114DF;
+
+}
+.message a{
+    padding: 4%;
+    font-size: 1.8rem;
+    border-radius: 20px;
+    border: 1px solid #8114DF;
 }
