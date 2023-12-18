@@ -104,7 +104,8 @@ def create_app(test_config=None):
             category3.items.append(set16)
             category4.items.append(set17)
             category4.items.append(set18)
-
+            user = User(email="sushi.admin.1@gmail.com", name="Root Admin", given_name="Root", family_name="Admin")
+            db.session.add(user)
             db.session.commit()
             return "Seeded successfully"
 

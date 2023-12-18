@@ -2,7 +2,7 @@
 {% block content %}
   <div class="center_vertical">
 
-     <form class="edit-form" name="Create client" method="post" novalidate>
+     <form class="edit-form" name="Create item" method="post" enctype="multipart/form-data" novalidate>
        {{ form.hidden_tag() }}
          {{form.name}}
          {% for error in form.name.errors %}

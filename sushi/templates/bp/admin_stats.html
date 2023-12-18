@@ -1,0 +1,83 @@
+{% extends "layout_admin.html" %}
+{% block content %}
+<div class="chart-block">
+  <canvas id="week-orders"></canvas>
+</div>
+<div class="chart-block">
+  <canvas id="week-visitors"></canvas>
+</div>
+<div class="chart-block">
+  <canvas id="month-orders"></canvas>
+</div>
+<div class="chart-block">
+  <canvas id="month-visitors"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx1 = document.getElementById('week-orders');
+    let xValues = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+let yValues = {{data}};
+  new Chart("week-orders", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: "Orders",
+      backgroundColor:"#8114DF",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  });
+
+  const ctx2 = document.getElementById('week-visitors');
+  xValues = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  yValues = [20,25,14,17,27,32,44];
+  new Chart("week-visitors", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: "Visitors",
+      backgroundColor:"#8114DF",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  });
+
+  const ctx3 = document.getElementById('month-orders');
+     xValues = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+ yValues = [38, 42, 55, 50, 59, 64, 83, 127, 120, 106, 134, 70];
+  new Chart("month-orders", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: "Orders",
+      backgroundColor:"#8114DF",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  });
+
+  const ctx4 = document.getElementById('month-visitors');
+  yValues = [420, 568, 834, 755, 851, 909, 1028, 1465, 1873, 1354, 1889, 934];
+  new Chart("month-visitors", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: "Visitors",
+      backgroundColor:"#8114DF",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  });
+
+</script>
+{% endblock %}

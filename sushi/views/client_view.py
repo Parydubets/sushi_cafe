@@ -3,7 +3,9 @@ from ..forms import CreateProductForm, LogInForm
 from ..service import get_goods_list, get_categories_list
 from..models import Good, db, Category
 from flask_login import login_required, logout_user
+from werkzeug.utils import secure_filename
 import random
+import os
 
 bp = Blueprint('bp', __name__, template_folder="bp")
 
@@ -52,14 +54,34 @@ def log_in():
 
 
 @bp.route('/add_item/good', methods=['POST', 'GET'])
+@login_required
 def add_item():
     form=CreateProductForm()
     if form.validate_on_submit():
-        if form.submit.data:
-            pass
-    return render_template("bp/add_item.html", form=form, page="add_itm")
+        name = form.name.data
+        description = form.description.data
+        mass = form.mass.data
+        price = form.price.data
+        f = form.image.data
+        filename = secure_filename(f.filename)
+        with current_app.app_context():
+            print(current_app.root_path)
+            f.save(os.path.join(
+                    current_app.root_path, 'static', filename
+            ))
+        print(name, description, mass, price)
+        print(filename)
+        db.session.add(Good(name=name, description=description, mass=mass, price=price, photo="../static/"+filename))
+        db.session.commit()
+    return render_template("bp/add_item.html", form=form, page="add_item")
+
+@bp.route('/admin/stats')
+@login_required
+def stats():
+    return render_template("bp/admin_stats.html", data=[1,4,6,8,3,2,10], page="stats")
 
 @bp.route('/add_item/category', methods=['POST', 'GET'])
+@login_required
 def add_category():
     form=CreateProductForm()
     if form.validate_on_submit():
