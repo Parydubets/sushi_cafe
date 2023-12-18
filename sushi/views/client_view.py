@@ -1,8 +1,12 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request, abort, current_app
 from ..forms import CreateProductForm, LogInForm
 from ..service import get_goods_list, get_categories_list
+from..models import Good, db
+from faker import Faker
+import random
 
 bp = Blueprint('bp', __name__, template_folder="bp")
+
 
 @bp.route('/test')
 def test():
@@ -46,14 +50,6 @@ def log_in():
             print(form.email.data, form.password.data)
     return render_template("bp/log_in.html", form=form)
 
-@bp.route('/log_check')
-def log_check():
-    print(get_categories_list())
-    print(get_goods_list(False))
-    data=get_goods_list(True, category=1)
-    print(data)
-
-    return render_template("bp/admin.html")
 
 @bp.route('/add_item', methods=['POST', 'GET'])
 def add_item():

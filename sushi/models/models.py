@@ -23,3 +23,14 @@ class Good(db.Model):
     price = db.Column(Integer, nullable=False)
     photo = db.Column(String(60), nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'))
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'mass': self.mass,
+            'price': self.price,
+            'photo': '<img src="'+self.photo+'">',
+            'category_id':self.category_id
+        }

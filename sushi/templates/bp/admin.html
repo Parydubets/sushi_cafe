@@ -1,4 +1,170 @@
 {% extends "layout_admin.html" %}
 {% block content %}
-  <h1> Hello world  </h1>
+<link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+<div id="table"></div>
+ <!--  <table class="table">
+                <thead>
+                    <tr>
+                        <th class="column-id">Id</th>
+                        <th class="column-f-name">First name</th>
+                        <th class="column-l-name">Last name</th>
+                        <th class="column-email">Email</th>
+                        <th class="column-phone">Phone</th>
+                        <th class="column-orders">Orders</th>
+                        <th class="column-registration">Registration</th>
+                        <th class="column-edit"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.first_name }}</td>
+                        <td>{{ item.last_name }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.orders|length }}</td>
+                        <td>{{ item.date }}</td>
+                        <td class="edit-row"><a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="#"><i class="fa-solid fa-gear"></i></a></td>
+                    {% endfor %}
+                    </tr>
+
+                </tbody>
+       <thead>
+       </table>
+<table class="table">
+                    <tr>
+                        <th class="column-id">Id</th>
+                        <th class="column-f-name">Name</th>
+                        <th class="column-good-description">Description</th>
+                        <th class="column-number">Mass</th>
+                        <th class="column-category">Category</th>
+                        <th class="column-number">Price</th>
+                        <th class="column-number">Amount</th>
+                        <th class="column-orders">Image</th>
+                        <th class="column-edit"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in info %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.mass }}</td>
+                        <td>{{ item.category_id }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ 10 }}</td>
+                        <td><img src="{{ item.photo }}" width="300px" height="300px" ></td>
+                        <td class="edit-row"><a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                            <a href="#"><i class="fa-solid fa-gear"></i></a></td>
+                    {% endfor %}
+                    </tr>
+
+                </tbody>
+            </table>-->
+<script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script>
+      const tableDiv = document.getElementById('table');
+        console.log("begin");
+      const updateUrl = (prev, query) => {
+        return prev + (prev.indexOf('?') >= 0 ? '&' : '?') + new URLSearchParams(query).toString();
+      };
+        console.log("updateUrl");
+      const editableCellAttributes = (data, row, col) => {
+          if (row) {
+            return {contentEditable: 'true', 'data-element-id': row.cells[0].data};
+          }
+          else {
+            return {};
+          }
+      };
+console.log("creating table");
+      new gridjs.Grid({
+        columns: [
+          { id: 'id', 'hidden': true },
+          { id: 'name', name: 'Name',  width: '10%','attributes': editableCellAttributes },
+          { id: 'description', sort: false, name: 'description' , width: '15%', 'attributes': editableCellAttributes },
+          { id: 'mass', name: 'mass', width: '5%', 'attributes': editableCellAttributes },
+          { id: 'price', name: 'price', width: '5%', 'attributes': editableCellAttributes },
+          { id: 'photo', name: 'photo' , width: '12%', 'attributes': editableCellAttributes, formatter: (cell) => {
+            return gridjs.html(`${cell}`)
+            // return `Update button`
+        } },
+        ],
+        server: {
+          url: '/api/data',
+          then: results => results.data,
+          total: results => results.total,
+        },
+        search: {
+          enabled: true,
+          server: {
+            url: (prev, search) => {
+              return updateUrl(prev, {search});
+            },
+          },
+        },
+        sort: {
+          enabled: true,
+          multiColumn: true,
+          server: {
+            url: (prev, columns) => {
+              const columnIds = ['id', 'name', 'description', 'mass', 'price', 'photo'];
+              const sort = columns.map(col => (col.direction === 1 ? '+' : '-') + columnIds[col.index]);
+              return updateUrl(prev, {sort});
+            },
+          },
+        },
+        pagination: {
+          enabled: true,
+          server: {
+            url: (prev, page, limit) => {
+              return updateUrl(prev, {start: page * limit, length: limit});
+            },
+          },
+        },
+      }).render(tableDiv);
+        console.log("created table?");
+      let savedValue;
+
+      tableDiv.addEventListener('focusin', ev => {
+        if (ev.target.tagName === 'TD') {
+          savedValue = ev.target.textContent;
+        }
+      });
+      tableDiv.addEventListener('focusout', ev => {
+        if (ev.target.tagName === 'TD') {
+          if (savedValue !== ev.target.textContent) {
+            fetch('/api/data', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                id: ev.target.dataset.elementId,
+                [ev.target.dataset.columnId]: ev.target.textContent
+              }),
+            });
+          }
+          savedValue = undefined;
+        }
+      });
+
+      tableDiv.addEventListener('keydown', ev => {
+        if (ev.target.tagName === 'TD') {
+          if (ev.key === 'Escape') {
+            ev.target.textContent = savedValue;
+            ev.target.blur();
+          }
+          else if (ev.key === 'Enter') {
+            ev.preventDefault();
+            ev.target.blur();
+          }
+        }
+      });
+    </script>
+<script>            const countAll = document.querySelector("[data-column-id='photo']");
+      console.log(document.querySelectorAll("[id='table']"))
+      console.log(document.querySelectorAll("[class='gridjs-tr']"))
+</script>
 {% endblock %}

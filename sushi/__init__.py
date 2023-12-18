@@ -3,11 +3,13 @@ The main module with app initialization
 """
 
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request, abort
 from flask_migrate import Migrate
 from sqlalchemy_utils import database_exists,create_database
 from .views import bp
 from .models import db, Category, Good
+from faker import Faker
+import random
 
 print(__name__)
 
@@ -75,4 +77,84 @@ def create_app(test_config=None):
             db.session.commit()
             return "Seeded successfully"
 
+    def create_fake_users(n):
+        """Generate fake users."""
+        print("creating fake")
+        faker = Faker()
+        for i in range(n):
+            user = Good(name=faker.name(),
+                        age=random.randint(20, 80),
+                        address=faker.address().replace('\n', ', '),
+                        phone=faker.phone_number(),
+                        email=faker.email())
+            db.session.add(user)
+        db.session.commit()
+        print(f'Added {n} fake users to the database.')
+
+
+    @app.route('/log_check')
+    def log_check():
+        print("log_check")
+        return render_template("bp/admin.html")
+    @app.route('/api/data')
+    def data():
+        print("api data")
+        query = Good.query
+
+        # search filter
+        search = request.args.get('search')
+        if search:
+            query = query.filter(db.or_(
+                Good.name.like(f'%{search}%'),
+                Good.description.like(f'%{search}%')
+            ))
+        total = query.count()
+
+        # sorting
+        sort = request.args.get('sort')
+        if sort:
+            order = []
+            for s in sort.split(','):
+                direction = s[0]
+                name = s[1:]
+                if name not in ['name', 'description']:
+                    name = 'name'
+                col = getattr(Good, name)
+                if direction == '-':
+                    col = col.desc()
+                order.append(col)
+            if order:
+                query = query.order_by(*order)
+
+        # pagination
+        start = request.args.get('start', type=int, default=-1)
+        length = request.args.get('length', type=int, default=-1)
+        if start != -1 and length != -1:
+            query = query.offset(start).limit(length)
+        print("api data end")
+        print([user.to_dict() for user in query])
+        print(total)
+        # response
+        return {
+            'data': [user.to_dict() for user in query],
+            'total': total,
+        }
+
+    @app.route('/api/data', methods=['POST'])
+    def update():
+        print("api data post")
+        data = request.get_json()
+        if 'id' not in data:
+            abort(400)
+        user = Good.query.get(data['id'])
+        for field in ['name', 'description', 'mass', 'price', 'photo']:
+            if field in data:
+                setattr(user, field, data[field])
+        db.session.commit()
+        print("api data post end")
+        return '', 204
+
+
+
+    print("very end")
     return app
