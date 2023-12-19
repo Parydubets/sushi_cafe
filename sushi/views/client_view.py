@@ -213,6 +213,11 @@ def categories_data():
         'total': total,
     }
 
+@bp.route('/tests')
+def tests():
+    return render_template('bp/test.html')
+
+
 @bp.route('/api/categories', methods=['POST'])
 @login_required
 def categories_update():
