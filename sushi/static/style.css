@@ -106,9 +106,8 @@ main{
 
 .menu_item{
     background: #F0E1E1;
-    margin: 1.7rem;
-    height: 600px;
-    width: 420px;
+    margin: 1.5rem;
+    width: 29%;
 }
 
 .inner_menu_item{
@@ -239,55 +238,6 @@ a.scroll_top{
     padding: 0px;
     text-align: center;
 }
-
-/* table styles */
-.table {
-    table-layout: fixed;
-    font-size: 22px;
-    width: 100%;
-}
-
-table{ font-style: normal; }
-.column-id { width: 3%; }
-.column-f-name { width: 13%; }
-.column-good-description { width: 20%; }
-.column-email { width: 7%; }
-.column-phone { width: 10%; }
-.column-registration { width: 15%; }
-.column-client-id{ width:5%; }
-.column-date{ width: 11%; }
-.column-cost{ width: 5%; }
-.column-name{ width: 25%; }
-.column-price{ width: 10%; }
-.column-category{ width: 10%; }
-.column-year{ width: 10%; }
-.column-amount{ width: 7%; }
-.column-edit { width: 7%; }
-.column-number{width: 5%}
-.column-orders{width: 22%}
-.table td {
-    border-bottom: #3D3E3E;
-}
-.table th {
-    background: white;
-    color: black;
-}
-.table td,
-.table th {
-    border-collapse: collapse;
-    text-align: left;
-    padding: 5px 10px;
-    word-break: break-all;
-}
-
-.table tr:nth-child(even) {
-  background: white;
-}
-.table tr:nth-child(odd) {
-  background: white;
-}
-
-
 
 td img{
     max-height: 300px;
